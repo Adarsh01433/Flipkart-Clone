@@ -1,7 +1,7 @@
-import { Platform, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '@store/reduxHook'
-import { getHomeContent } from './api/actions'
+import { Platform, StyleSheet, View } from 'react-native'
+// import React, { useEffect } from 'react'
+// import { useAppDispatch, useAppSelector } from '@store/reduxHook'
+// import { getHomeContent } from './api/actions'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useSharedValue } from 'react-native-reanimated'
 
