@@ -35,7 +35,7 @@ const Home = () => {
       </Animated.View>
 
       <Animated.View style={[moveUpStyle, { height: screenHeight }]}>
-       <MainList/>
+       <MainList scrollYGlobal = {scrollYGlobal}/>
       </Animated.View>
 
     </SafeAreaView>
