@@ -6,16 +6,28 @@ import {
   Platform,
   RefreshControl,
   StyleSheet,
-  Text,
-  View,
 } from 'react-native';
 import React, { FC, useRef, useState } from 'react';
 import { dynamicDashboardData as fullData } from '@utils/db';
 import AdCarousal from '../organisms/AdCarousal';
+import Categories from '../organisms/Categories';
+import Sponser from '../organisms/Sponser';
+import { Dimensions } from "react-native";   // ⭐ ADDED
+import VerticalList from '../organisms/VerticalList';
+import HorizontalList from '../organisms/HorizontalList';
+import AnimatedHorizontalList from '../organisms/AnimatedHorizontalList';
+
+const SCREEN_HEIGHT = Dimensions.get("screen").height;   // ⭐ ADDED
 
 const sectionComponents: { [key: string]: React.ComponentType<any> } = {
   ad_carousal: AdCarousal,
+  categories: Categories,
+  sponser: Sponser,
+  vertical_list : VerticalList,
+  horizontal_list : HorizontalList,
+  animated_horizontal_list : AnimatedHorizontalList
 };
+
 const PAGE_SIZE = 4;
 
 const MainList: FC<{ scrollYGlobal: any }> = ({ scrollYGlobal }) => {
@@ -38,6 +50,7 @@ const MainList: FC<{ scrollYGlobal: any }> = ({ scrollYGlobal }) => {
     setTimeout(() => {
       setCurrentpage(1);
       setData(fullData.slice(0, PAGE_SIZE));
+      setIsRefreshing(false);
     }, 3000);
   };
 
@@ -49,7 +62,7 @@ const MainList: FC<{ scrollYGlobal: any }> = ({ scrollYGlobal }) => {
       const nextPage = currentPage + 1;
       const newItems = fullData?.slice(0, nextPage * PAGE_SIZE);
       setData(newItems);
-      setIsLoadingMore(true);
+      setIsLoadingMore(false);
     });
   };
 
@@ -72,11 +85,16 @@ const MainList: FC<{ scrollYGlobal: any }> = ({ scrollYGlobal }) => {
       onEndReached={handleLoadMore}
       onEndReachedThreshold={0.5}
       nestedScrollEnabled
+
       contentContainerStyle={{
         paddingBottom: Platform.OS === 'android' ? 200 : 300,
+
+        minHeight: SCREEN_HEIGHT + 200,   // ⭐⭐ MAIN FIX ADDED
       }}
+
       showsVerticalScrollIndicator={false}
       keyExtractor={(item, index) => index.toString()}
+
       ListFooterComponent={
         isLoadingMore ? (
           <ActivityIndicator
@@ -92,4 +110,4 @@ const MainList: FC<{ scrollYGlobal: any }> = ({ scrollYGlobal }) => {
 
 export default MainList;
 
-const styles = StyleSheet.create({}); 
+const styles = StyleSheet.create({});
