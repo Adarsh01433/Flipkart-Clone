@@ -35,7 +35,7 @@ const Products: FC = () => {
     <SafeAreaView style = {styles.container}>
         <SearchBar cartLength={0} />
         <FlatList bounces = {false} data={products} 
-         renderItem={renderItem} keyExtractor={(Item)=>Item._id.toString()}
+         renderItem={renderItem} keyExtractor={(item)=>item._id.toString()}
          numColumns={2} 
          ListEmptyComponent={
           <View style = {styles.emptyContainer}>
