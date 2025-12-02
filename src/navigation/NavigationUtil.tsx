@@ -32,7 +32,7 @@ export async function resetAndNavigate(routName : string, params?:object){
 
 
 
-export async function goBack(routName : string, params?:object){
+export async function goBack(routName? : string, params?:object){
     navigationRef.isReady()
     if(navigationRef.isReady ()){
    navigationRef.dispatch(CommonActions.goBack())
