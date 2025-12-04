@@ -6,10 +6,13 @@ import { screenHeight } from '@utils/Constants';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SearchBar from './atoms/SearchBar';
 import ProductItem from './atoms/ProductItem';
+import { useAppSelector } from '@store/reduxHook';
+import { selectTotalItemsInCart } from '@modules/cart/api/slice';
 
 const Products: FC = () => {
   const route = useRoute();
   const category = route?.params as any;
+  const count = useAppSelector(selectTotalItemsInCart);
   const [products, setProducts] = useState<any[]>([]);
 
   const fetchProducts = async () => {
@@ -33,7 +36,7 @@ const Products: FC = () => {
 
   return (
     <SafeAreaView style = {styles.container}>
-        <SearchBar cartLength={0} />
+        <SearchBar cartLength={count} />
         <FlatList bounces = {false} data={products} 
          renderItem={renderItem} keyExtractor={(item)=>item._id.toString()}
          numColumns={2} 
