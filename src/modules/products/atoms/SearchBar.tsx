@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { FC } from 'react'
 import Icon from '@components/atoms/Icon';
-import { goBack } from '@navigation/NavigationUtil';
+import { goBack, navigate } from '@navigation/NavigationUtil';
 
 interface SearchBarProps {
   cartLength : number;
@@ -22,7 +22,7 @@ const SearchBar:FC<SearchBarProps> = ({cartLength}) => {
               </View>}
       </View>
       <Icon size={24} name='heart-outline' iconFamily='Ionicons' color='#000'/>
-      <Pressable>
+      <Pressable onPress={()=>navigate("cart")}>
         <Icon size={24} name='cart-sharp' iconFamily='Ionicons' color='#000'/>
       </Pressable>
     </View>

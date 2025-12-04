@@ -57,12 +57,12 @@ export const cartSlice = createSlice({
 })
 export const {addItem, removeItem, clearCart} = cartSlice.actions;
 export const selectCartItems = (state:RootState)=> state.cart.items;
-export const selectItemCountById = (id : string)=> {
+export const selectItemCountById = (id : string)=> 
  createSelector(selectCartItems,(items)=> {
    const item = items.find((item:any)=>item._id===id)
    return item ? item?.quantity : 0
  })
-}
+
 export const selectTotalItemsInCart = createSelector(selectCartItems,(items )=> {
    return  items.reduce((total, item)=> total + item?.quantity, 0)
 })
